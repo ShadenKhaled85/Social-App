@@ -26,8 +26,7 @@ export class CommentComponent implements OnInit{
       content: [null, [Validators.required]],
       post: [this.postId(), [Validators.required]]
     })
-    this.createComment();
-    // this.resetCreateForm();
+    this.submitCreateComment();
   }
 
   getPostComments(){
@@ -42,7 +41,7 @@ export class CommentComponent implements OnInit{
     })
   }
 
-  createComment(){
+  submitCreateComment(){
     if(this.createCommentForm.valid){
       this.commentsService.createComment(this.createCommentForm.value).subscribe({
         next:(res)=>{

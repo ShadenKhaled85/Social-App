@@ -14,8 +14,8 @@ export class PostsService {
     return this.httpCliient.post(`${environment.baseUrl}posts`, data)
   }
 
-  getAllPosts() : Observable<any> {
-    return this.httpCliient.get(`${environment.baseUrl}posts`)
+  getAllPosts(page:number = 1) : Observable<any> {
+    return this.httpCliient.get(`${environment.baseUrl}posts?page=${page}`)
   }
 
   getMyPosts() : Observable<any> {

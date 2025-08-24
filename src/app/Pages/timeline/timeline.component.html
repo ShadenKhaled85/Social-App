@@ -1,5 +1,16 @@
 <section class="w-full md:w-2/3 lg:w-1/2 mx-auto flex flex-col gap-8 p-4">
 
+  <!-- ? Create a New Post -->
+  <div class="bg-white p-8 rounded-xl">
+    <input (click)="onModalOpen()" type="text" id="default-input" placeholder="What's on your mind?" readonly
+      class="cursor-pointer bg-gray-50 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-gray-500 border focus:border-gray-500 block w-full p-2.5">
+  </div>
+
+  @if (isModalOpen) {
+  <app-new-post [isModalOpen]="isModalOpen" (closeModal)="onModalClose()" (newPost)="getAllPosts()">
+  </app-new-post>
+  }
+
   <!-- ? Post -->
   @for (post of posts(); track post._id) {
   <div
@@ -30,7 +41,6 @@
     <div class="overflow-hidden rounded-xl">
       <img [src]="post.image" class="w-full h-64 object-contain" alt="Post Image">
     </div>
-
 
     <!-- ? Show Comments Button -->
     <div class="flex justify-start">
