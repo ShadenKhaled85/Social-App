@@ -1,0 +1,123 @@
+<section class="w-full max-w-xl mx-auto bg-white shadow-lg rounded-xl p-8">
+  <h1 class="text-center text-blue-700 text-3xl font-bold mb-6">Register Now</h1>
+
+  <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()" class="space-y-5">
+
+    <!--? ================= Name ================= -->
+    <div>
+      <label for="userName" class="block mb-1 text-sm font-medium text-gray-700">Name</label>
+      <input formControlName="name" type="text" id="userName" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 text-sm
+              focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition">
+
+      <!-- ? Name Alert Message -->
+      <!-- @if(registerForm.get('name')?.errors && registerForm.get('name')?.touched){
+      <div class="flex p-4 mb-4 mt-4 text-sm text-red-800 rounded-lg bg-red-100" role="alert">
+        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <span class="font-medium">Ensure that these requirements are met:</span>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(registerForm.get('name')?.getError('required')){
+            <li>Name is required</li>
+            }
+            @if (registerForm.get('name')?.getError('minlength')) {
+            <li>At least 3 characters</li>
+            }
+            @if (registerForm.get('name')?.getError('maxlength')) {
+            <li>Exceeded maximum length (Up to 20 characters)</li>
+            }
+          </ul>
+        </div>
+      </div>
+      } -->
+    </div>
+
+    <!--? ================= Email ================= -->
+    <div>
+      <label for="userEmail" class="block mb-1 text-sm font-medium text-gray-700">Email</label>
+      <input formControlName="email" type="email" id="userEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 text-sm
+              focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition">
+    </div>
+
+    <!--? ================= Password ================= -->
+    <div>
+      <label for="userPassword" class="block mb-1 text-sm font-medium text-gray-700">Password</label>
+      <input formControlName="password" type="password" id="userPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 text-sm
+              focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition">
+    </div>
+
+    <!--? ================= Confirm Password ================= -->
+    <div>
+      <label for="userRePassword" class="block mb-1 text-sm font-medium text-gray-700">Confirm Password</label>
+      <input formControlName="rePassword" type="password" id="userRePassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 text-sm
+              focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition">
+
+      <!-- @if(registerForm.getError('mismatch') && registerForm.get('rePassword')?.touched){
+      <div class="flex p-4 mb-4 mt-4 text-sm text-red-800 rounded-lg bg-red-100" role="alert">
+        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <span class="font-medium">Ensure that these requirements are met:</span>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(registerForm.get('rePassword')?.getError('required')) {
+            <li>Password is required</li>
+            }
+            <li>Password doesn't match</li>
+          </ul>
+        </div>
+      </div>
+      } -->
+    </div>
+
+    <!--? ================= Date of birth ================= -->
+    <div>
+      <label for="userDateOfBirth" class="block mb-1 text-sm font-medium text-gray-700">Date of birth</label>
+      <input formControlName="dateOfBirth" type="date" id="userDateOfBirth" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 text-sm
+              focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition">
+    </div>
+
+    <!--? ================= Gender ================= -->
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700">Gender</label>
+      <div class="flex gap-6">
+
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input formControlName="gender" type="radio" name="gender" value="male"
+            class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+          <span class="text-gray-700 text-sm">Male</span>
+        </label>
+
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input formControlName="gender" type="radio" name="gender" value="female"
+            class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+          <span class="text-gray-700 text-sm">Female</span>
+        </label>
+
+      </div>
+    </div>
+
+
+    <!--? ================= Submit Button ================= -->
+    @if (errorMsg) {
+    <p class="text-center p-4 mb-4 mt-4 text-sm text-red-800 rounded-lg bg-red-100">{{errorMsg}}</p>
+    }
+
+    @if (successMsg) {
+    <p class="text-center p-4 mb-4 mt-4 text-sm text-blue-800 rounded-lg bg-blue-100">{{successMsg}}</p>
+    }
+
+    <button type="submit"
+      class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold
+            hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:ring-offset-1 transition disabled:bg-gray-400 disabled:cursor-default">
+      Register
+    </button>
+  </form>
+</section>

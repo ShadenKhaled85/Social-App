@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+body{
+  background-color: #eee;
+}
+
+button, a {
+  cursor: pointer;
+}
+
+image{
+  width: 100%;
+}
