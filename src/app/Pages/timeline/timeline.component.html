@@ -1,6 +1,7 @@
 <section class="w-full md:w-2/3 lg:w-1/2 mx-auto flex flex-col gap-8 p-4">
+
   <!-- ? Post -->
-  @for (post of posts; track post._id) {
+  @for (post of posts(); track post._id) {
   <div
     class="post flex flex-col gap-5 bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
     <div class="userProfile flex justify-between items-center">
@@ -8,7 +9,7 @@
         <img [src]="post.user.photo" class="w-12 h-12 rounded-full" alt="profile_user">
         <div>
           <h2 class="text-lg font-semibold text-gray-800"> {{post.user.name}} </h2>
-          <p class="text-sm text-gray-400"> {{post.createdAt}} 3 hours ago</p>
+          <p class="text-sm text-gray-400"> {{post.createdAt | date :'medium'}}</p>
         </div>
       </div>
       <div class="relative group">
@@ -24,21 +25,25 @@
       </div>
     </div>
 
-    <p class="text-gray-700">
-      {{post.body}}
-    </p>
+    <p class="text-gray-700">{{post.body}}</p>
 
     <div class="overflow-hidden rounded-xl">
-      <img [src]="post.image" class="w-full h-64 object-contain" alt="post image">
+      <img [src]="post.image" class="w-full h-64 object-contain" alt="Post Image">
     </div>
 
 
     <!-- ? Show Comments Button -->
-    <div class="flex justify-end">
-      <button class="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-4 py-2 text-sm shadow-md transition">
+    <div class="flex justify-start">
+      <button #showCommentsBtn class="text-gray-800 px-2 py-2 text-md hover:text-blue-700 transition">
         Show Comments
       </button>
     </div>
+
+    <!-- ? Comments -->
+    @defer (on interaction(showCommentsBtn)) {
+    <app-comment [postId]="post._id"></app-comment>
+    }
+
   </div>
   }
 

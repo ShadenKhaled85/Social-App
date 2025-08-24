@@ -10,7 +10,7 @@ export class CommentsService {
 
   constructor( private httpCliient : HttpClient ) { }
 
-  createPost(data:any) : Observable<any> {
+  createComment(data:any) : Observable<any> {
     return this.httpCliient.post(`${environment.baseUrl}comments`, data)
   }
 

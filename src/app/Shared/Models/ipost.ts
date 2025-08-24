@@ -17,13 +17,8 @@ export interface User {
 export interface Comment {
   _id: string
   content: string
-  commentCreator: CommentCreator
+  commentCreator: User
   post: string
   createdAt: string
 }
 
-export interface CommentCreator {
-  _id: string
-  name: string
-  photo: string
-}
