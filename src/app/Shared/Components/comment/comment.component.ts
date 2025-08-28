@@ -2,13 +2,13 @@ import { AfterViewChecked, Component, inject, input, InputSignal, OnInit, signal
 import { CommentsService } from '../../../Core/Services/comments/comments.service';
 import { IComment } from '../../Models/icomment';
 import { DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-comment',
-  imports: [ReactiveFormsModule , DatePipe],
+  imports: [ReactiveFormsModule , DatePipe, FormsModule],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css'
 })
@@ -25,6 +25,9 @@ export class CommentComponent implements OnInit, AfterViewChecked{
   updateForm !: FormGroup;
   isDropDownOpen : boolean = false;
   dropdownInitialized = false;
+  isUpdate : boolean = false;
+  updatedContent: string = '';
+  updatedCommentId : string = '';
 
   ngOnInit(): void {
     this.getPostComments();
@@ -71,12 +74,30 @@ export class CommentComponent implements OnInit, AfterViewChecked{
     }
   }
 
-  updateComments(){
-    // this.commentsService.updateComments()
+  updateComment(commentId:string, commentUpdatedContent:any){
+    this.isUpdate = true;
+    this.updatedContent = commentUpdatedContent
+    this.commentsService.updateComments(commentId, commentUpdatedContent).subscribe({
+      next:(res)=>{
+        console.log(res);
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
   }
 
-  deleteComment(){
-
+  deleteComment(commentId:string){
+    this.commentsService.deleteComment(commentId).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.postComments.set(res.comments);
+        this.toastrService.success('Comment deleted', 'Comments', {progressBar:true});
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
   }
 
   resetCreateForm(){

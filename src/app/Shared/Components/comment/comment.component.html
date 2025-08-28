@@ -23,14 +23,19 @@
           <div [id]="'dropdown' + comment._id"
             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
             <ul class="py-2 text-sm text-gray-700" [attr.aria-labelledby]="'dropdownDefaultButton' + comment._id">
-              <li><a class="block px-4 py-2 hover:bg-gray-100">Edit</a></li>
-              <li><a class="block px-4 py-2 hover:bg-gray-100">Delete</a></li>
+              <li><a (click)="updateComment(comment._id, comment.content)"
+                  class="block px-4 py-2 hover:bg-gray-100">Edit</a></li>
+              <li><a (click)="deleteComment(comment._id)" class="block px-4 py-2 hover:bg-gray-100">Delete</a></li>
             </ul>
           </div>
-
         </div>
       </div>
-      <p class="text-gray-700">{{comment.content}} </p>
+
+      @if (isUpdate) {
+      <textarea [(ngModel)]="updatedContent" id="chat" rows="1"
+        class="block  p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-gray-500 focus:border-gray-500"
+        placeholder="Your comment..."></textarea>
+      }
     </div>
 
     }

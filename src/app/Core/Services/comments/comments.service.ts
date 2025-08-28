@@ -18,8 +18,8 @@ export class CommentsService {
     return this.httpCliient.get(`${environment.baseUrl}posts/${postId}/comments`)
   }
 
-  updateComments(postId:string, data:any) : Observable<any> {
-    return this.httpCliient.put(`${environment.baseUrl}comments/${postId}` , data)
+  updateComments(commentId:string, data:any) : Observable<any> {
+    return this.httpCliient.put(`${environment.baseUrl}comments/${commentId}` , data)
   }
 
   deleteComment(commentId:string) : Observable<any> {
