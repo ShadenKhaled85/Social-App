@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, OnInit, Output, signal, Writabl
 import { PostsService } from '../../Core/Services/posts/posts.service';
 import { FormsModule } from '@angular/forms';
 import { IPost } from '../../Shared/Models/ipost';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-post',
@@ -12,6 +13,7 @@ import { IPost } from '../../Shared/Models/ipost';
 export class NewPostComponent implements OnInit {
 
   private readonly postsService = inject(PostsService);
+  private readonly toastrService = inject(ToastrService);
 
   posts : WritableSignal<IPost[]> = signal([]);
   newPostContent : string = '';
@@ -32,6 +34,7 @@ export class NewPostComponent implements OnInit {
     this.postsService.createPost(createPostFormData).subscribe({
       next:(res)=>{
         console.log(res);
+        this.toastrService.success('Post created', 'Posts', {progressBar:true});
         this.newPost.emit(true);
         //  Clear Form
         this.newPostContent = '';

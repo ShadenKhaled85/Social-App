@@ -4,10 +4,11 @@ import { PostsService } from './../../Core/Services/posts/posts.service';
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { CommentComponent } from "../../Shared/Components/comment/comment.component";
 import { NewPostComponent } from "../new-post/new-post.component";
+import { UserProfilePhotoComponent } from "../user-profile-photo/user-profile-photo.component";
 
 @Component({
   selector: 'app-timeline',
-  imports: [DatePipe, CommentComponent, NewPostComponent],
+  imports: [DatePipe, CommentComponent, NewPostComponent, UserProfilePhotoComponent],
   templateUrl: './timeline.component.html',
   styleUrl: './timeline.component.css'
 })
@@ -16,7 +17,8 @@ export class TimelineComponent implements OnInit{
   private readonly postsService = inject(PostsService);
 
   posts : WritableSignal<IPost[]> = signal([]);
-  isModalOpen : boolean = false;
+  isCreatePostModalOpen : boolean = false;
+  isChangePhotoModalOpen : boolean = false;
 
   ngOnInit(): void {
     this.getAllPosts();
@@ -43,13 +45,19 @@ export class TimelineComponent implements OnInit{
     })
   }
 
-
-
   onModalOpen(){
-    this.isModalOpen = true;
+    this.isCreatePostModalOpen = true;
   }
 
   onModalClose(){
-    this.isModalOpen = false;
+    this.isCreatePostModalOpen = false;
+  }
+
+  onChangePhotoModalOpen(){
+    this.isChangePhotoModalOpen = true;
+  }
+
+  onChangePhotoModalClose(){
+    this.isChangePhotoModalOpen = false;
   }
 }

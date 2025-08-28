@@ -1,15 +1,37 @@
-<section class="w-full md:w-2/3 lg:w-1/2 mx-auto flex flex-col gap-8 p-4">
+<section class="w-full md:w-2/3 lg:w-2/3 mx-auto flex flex-col gap-8 p-4">
 
-  <!-- ? Create a New Post -->
-  <div class="bg-white p-8 rounded-xl">
-    <input (click)="onModalOpen()" type="text" id="default-input" placeholder="What's on your mind?" readonly
-      class="cursor-pointer bg-gray-50 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-gray-500 border focus:border-gray-500 block w-full p-2.5">
+  <div class="bg-white p-8 rounded-xl flex justify-between">
+
+    <!-- ? Create a New Post -->
+
+    <div class="w-2/3">
+      <input (click)="onModalOpen()" type="text" id="default-input" placeholder="What's on your mind?" readonly
+        class="cursor-pointer bg-gray-50 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-gray-500 border focus:border-gray-500 block w-full p-2.5">
+    </div>
+
+    @if (isCreatePostModalOpen) {
+    <app-new-post [isModalOpen]="isCreatePostModalOpen" (closeModal)="onModalClose()" (newPost)="getAllPosts()">
+    </app-new-post>
+    }
+
+    <!-- ? Upload Profile Photo -->
+
+    <div>
+      <button (click)="onChangePhotoModalOpen()" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-600 text-white font-medium
+            hover:bg-blue-700 transition shadow-md">
+        <i class="fa-solid fa-upload"></i>
+        Upload Profile Photo
+      </button>
+    </div>
+
+    @if (isChangePhotoModalOpen) {
+    <app-user-profile-photo [isModalOpen]="isChangePhotoModalOpen"
+      (closeModal)="onChangePhotoModalClose()"></app-user-profile-photo>
+    }
+
   </div>
 
-  @if (isModalOpen) {
-  <app-new-post [isModalOpen]="isModalOpen" (closeModal)="onModalClose()" (newPost)="getAllPosts()">
-  </app-new-post>
-  }
+
 
   <!-- ? Post -->
   @for (post of posts(); track post._id) {
@@ -22,17 +44,6 @@
           <h2 class="text-lg font-semibold text-gray-800"> {{post.user.name}} </h2>
           <p class="text-sm text-gray-400"> {{post.createdAt | date :'medium'}}</p>
         </div>
-      </div>
-      <div class="relative group">
-        <i class="fa-solid fa-ellipsis text-gray-500 cursor-pointer hover:text-gray-800"></i>
-        <!-- Dropdown (optional) -->
-        <!-- <div
-          class="absolute hidden group-hover:block right-0 mt-2 bg-white border rounded-lg shadow-lg text-sm text-gray-700">
-          <ul class="py-2">
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Edit</li>
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Delete</li>
-          </ul>
-        </div> -->
       </div>
     </div>
 

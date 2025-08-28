@@ -13,7 +13,21 @@
           <p>{{comment.createdAt | date:'medium'}} </p>
         </div>
         <div>
-          <i class="fa-solid fa-ellipsis text-gray-500 cursor-pointer hover:text-gray-800"></i>
+
+          <button [id]="'dropdownDefaultButton' + comment._id" [attr.data-dropdown-toggle]="'dropdown' + comment._id"
+            type="button" class="text-white font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center">
+            <i class="fa-solid fa-ellipsis text-gray-500 cursor-pointer hover:text-gray-800"></i>
+          </button>
+
+          <!-- ? Dropdown -->
+          <div [id]="'dropdown' + comment._id"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+            <ul class="py-2 text-sm text-gray-700" [attr.aria-labelledby]="'dropdownDefaultButton' + comment._id">
+              <li><a class="block px-4 py-2 hover:bg-gray-100">Edit</a></li>
+              <li><a class="block px-4 py-2 hover:bg-gray-100">Delete</a></li>
+            </ul>
+          </div>
+
         </div>
       </div>
       <p class="text-gray-700">{{comment.content}} </p>
