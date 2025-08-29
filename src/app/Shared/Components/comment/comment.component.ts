@@ -22,20 +22,25 @@ export class CommentComponent implements OnInit, AfterViewChecked{
   postId : InputSignal<string> = input.required();
   postComments : WritableSignal<IComment[]> = signal([]);
   createCommentForm !: FormGroup;
+  updateCommentForm !: FormGroup;
   updateForm !: FormGroup;
   isDropDownOpen : boolean = false;
   dropdownInitialized = false;
   isUpdate : boolean = false;
-  updatedContent: string = '';
-  updatedCommentId : string = '';
+  editingCommentId : string = '';
 
   ngOnInit(): void {
     this.getPostComments();
+
     this.createCommentForm = this.formBuilder.group({
       content: [null, [Validators.required]],
       post: [this.postId(), [Validators.required]]
     })
     this.submitCreateComment();
+
+    this.updateCommentForm = this.formBuilder.group({
+      content: [null, [Validators.required]]
+    })
   }
 
   ngAfterViewChecked(): void {
@@ -74,18 +79,30 @@ export class CommentComponent implements OnInit, AfterViewChecked{
     }
   }
 
-  updateComment(commentId:string, commentUpdatedContent:any){
+  updateComment(commentId:string){
     this.isUpdate = true;
-    this.updatedContent = commentUpdatedContent
-    this.commentsService.updateComments(commentId, commentUpdatedContent).subscribe({
+    this.commentsService.updateComment(commentId, this.updateCommentForm.get('content')?.value).subscribe({
       next:(res)=>{
-        console.log(res);
+        console.log('Comment updated', res);
+        this.getPostComments();
+        this.toastrService.success('Comment updated', 'Comments', {progressBar:true});
+        this.resetUpdateForm();
       },
       error:(err)=>{
         console.log(err);
       }
     })
   }
+
+  openEditComment(commentId:string){
+    this.editingCommentId = commentId;
+    this.isUpdate = true;
+  }
+
+  isEditing(commentId:string) : boolean{
+    return this.editingCommentId === commentId;
+  }
+
 
   deleteComment(commentId:string){
     this.commentsService.deleteComment(commentId).subscribe({
@@ -102,6 +119,12 @@ export class CommentComponent implements OnInit, AfterViewChecked{
 
   resetCreateForm(){
     this.createCommentForm.patchValue({
+      content: null
+    })
+  }
+
+  resetUpdateForm(){
+    this.updateCommentForm.patchValue({
       content: null
     })
   }
