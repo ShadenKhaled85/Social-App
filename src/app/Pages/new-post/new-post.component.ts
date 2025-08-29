@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output, signal, WritableSignal } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, signal, WritableSignal } from '@angular/core';
 import { PostsService } from '../../Core/Services/posts/posts.service';
 import { FormsModule } from '@angular/forms';
 import { IPost } from '../../Shared/Models/ipost';
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './new-post.component.html',
   styleUrl: './new-post.component.css'
 })
-export class NewPostComponent implements OnInit {
+export class NewPostComponent {
 
   private readonly postsService = inject(PostsService);
   private readonly toastrService = inject(ToastrService);
@@ -22,10 +22,6 @@ export class NewPostComponent implements OnInit {
   @Input() isModalOpen : boolean = false;
   @Output() closeModal = new EventEmitter();
   @Output() newPost = new EventEmitter();
-
-  ngOnInit(): void {
-
-  }
 
   submitCreatePost(){
     let createPostFormData = new FormData();

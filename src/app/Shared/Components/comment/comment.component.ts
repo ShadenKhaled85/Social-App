@@ -129,8 +129,4 @@ export class CommentComponent implements OnInit, AfterViewChecked{
     })
   }
 
-  onOpenDropDown(){
-    this.isDropDownOpen = true;
-  }
-
 }
