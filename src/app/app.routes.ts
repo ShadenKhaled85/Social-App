@@ -8,12 +8,14 @@ import { BlankComponent } from './Layouts/blank/blank.component';
 import { AuthComponent } from './Layouts/auth/auth.component';
 import { authGuard } from './Core/Guards/auth/auth.guard';
 import { loggedGuard } from './Core/Guards/logged/logged.guard';
+import { UserProfileComponent } from './Pages/user-profile/user-profile.component';
 
 export const routes: Routes = [
   {path:'', redirectTo:'timeline', pathMatch:'full'},
 
   {path:'' , component:BlankComponent, canActivate:[authGuard] ,children:[
     {path:'timeline' , component:TimelineComponent, title: 'Timeline'},
+    {path:'userProfile' , component:UserProfileComponent, title: 'User Profile'},
   ]},
 
   {path:'' , component:AuthComponent, canActivate:[loggedGuard], children:[

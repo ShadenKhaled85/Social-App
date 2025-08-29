@@ -11,6 +11,9 @@
 
         @if (isLoggedIn()) {
         <li>
+          <a routerLink="userProfile" class="hover:text-blue-700 transition">My Profile</a>
+        </li>
+        <li>
           <a (click)="signOut()" class="hover:text-blue-700 transition">Sign Out</a>
         </li>
         } @else {

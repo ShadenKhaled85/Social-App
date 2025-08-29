@@ -1,12 +1,10 @@
-<section class="w-full md:w-2/3 lg:w-2/3 mx-auto flex flex-col gap-8 p-4">
+<section class="w-full md:w-2/3 lg:w-2/3 mx-auto flex flex-col gap-8 p-6">
 
-  <div class="bg-white p-8 rounded-xl flex justify-between">
-
-    <!-- ? Create a New Post -->
-
+  <!-- ? Create a New Post -->
+  <div class="bg-white p-6 rounded-2xl shadow-md flex justify-between items-center gap-6">
     <div class="w-2/3">
       <input (click)="onModalOpen()" type="text" id="default-input" placeholder="What's on your mind?" readonly
-        class="cursor-pointer bg-gray-50 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-gray-500 border focus:border-gray-500 block w-full p-2.5">
+        class="cursor-pointer bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-3 shadow-sm hover:shadow-md transition">
     </div>
 
     @if (isCreatePostModalOpen) {
@@ -14,13 +12,11 @@
     </app-new-post>
     }
 
-    <!-- ? Upload Profile Photo -->
-
     <div>
-      <button (click)="onChangePhotoModalOpen()" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-600 text-white font-medium
-            hover:bg-blue-700 transition shadow-md">
+      <button (click)="onChangePhotoModalOpen()"
+        class="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition-all shadow-md hover:shadow-lg">
         <i class="fa-solid fa-upload"></i>
-        Upload Profile Photo
+        Change profile photo
       </button>
     </div>
 
@@ -28,10 +24,7 @@
     <app-user-profile-photo [isModalOpen]="isChangePhotoModalOpen"
       (closeModal)="onChangePhotoModalClose()"></app-user-profile-photo>
     }
-
   </div>
-
-
 
   <!-- ? Post -->
   @for (post of posts(); track post._id) {
@@ -39,23 +32,23 @@
     class="post flex flex-col gap-5 bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
     <div class="userProfile flex justify-between items-center">
       <div class="flex items-center gap-4">
-        <img [src]="post.user.photo" class="w-12 h-12 rounded-full" alt="profile_user">
+        <img [src]="post.user.photo" class="w-12 h-12 rounded-full border border-gray-200 shadow-sm" alt="profile_user">
         <div>
-          <h2 class="text-lg font-semibold text-gray-800"> {{post.user.name}} </h2>
-          <p class="text-sm text-gray-400"> {{post.createdAt | date :'medium'}}</p>
+          <h2 class="text-lg font-semibold text-gray-900"> {{post.user.name}} </h2>
+          <p class="text-xs text-gray-500"> {{post.createdAt | date :'medium'}}</p>
         </div>
       </div>
     </div>
 
-    <p class="text-gray-700">{{post.body}}</p>
+    <p class="text-gray-800 leading-relaxed">{{post.body}}</p>
 
-    <div class="overflow-hidden rounded-xl">
-      <img [src]="post.image" class="w-full h-64 object-contain" alt="Post Image">
+    <div class="overflow-hidden rounded-xl bg-gray-50">
+      <img [src]="post.image" class="w-full h-[500px] object-cover" alt="Post Image">
     </div>
 
     <!-- ? Show Comments Button -->
     <div class="flex justify-start">
-      <button #showCommentsBtn class="text-gray-800 px-2 py-2 text-md hover:text-blue-700 transition">
+      <button #showCommentsBtn class="text-sm text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition-all">
         Show Comments
       </button>
     </div>
