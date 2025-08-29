@@ -4,15 +4,19 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../Environments/environment';
 import { jwtDecode } from "jwt-decode";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  constructor( private httpCliient : HttpClient ) { }
+  constructor(
+    private httpCliient : HttpClient,
+    private router : Router
+  ) { }
 
-  userData : string = '';
+  userData : string | null = null;
 
   signUp(data:IUser) : Observable<any> {
     return this.httpCliient.post(`${environment.baseUrl}users/signup`, data)
@@ -37,5 +41,11 @@ export class UsersService {
 
   getLoggedUserData() : Observable<any >{
     return this.httpCliient.get(`${environment.baseUrl}users/profile-data`)
+  }
+
+  signOut(){
+    localStorage.removeItem('Token');
+    this.userData = null;
+    this.router.navigate(['login']);
   }
 }

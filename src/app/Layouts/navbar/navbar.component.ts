@@ -1,5 +1,6 @@
-import { Component, Input, input, InputSignal } from '@angular/core';
+import { Component, inject, Input, input, InputSignal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { UsersService } from '../../Core/Services/users/users.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavbarComponent {
 
+  private readonly usersService = inject(UsersService);
   isLoggedIn:InputSignal<boolean> = input(true);
+
+  signOut(){
+    this.usersService.signOut()
+  }
 
 }

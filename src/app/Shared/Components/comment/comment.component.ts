@@ -108,7 +108,7 @@ export class CommentComponent implements OnInit, AfterViewChecked{
     this.commentsService.deleteComment(commentId).subscribe({
       next:(res)=>{
         console.log(res);
-        this.postComments.set(res.comments);
+        this.getPostComments();
         this.toastrService.success('Comment deleted', 'Comments', {progressBar:true});
       },
       error:(err)=>{

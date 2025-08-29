@@ -11,7 +11,7 @@
 
         @if (isLoggedIn()) {
         <li>
-          <a class="hover:text-blue-700 transition">Sign Out</a>
+          <a (click)="signOut()" class="hover:text-blue-700 transition">Sign Out</a>
         </li>
         } @else {
         <li>
