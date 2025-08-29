@@ -47,5 +47,6 @@ export class UsersService {
     localStorage.removeItem('Token');
     this.userData = null;
     this.router.navigate(['login']);
+
   }
 }
