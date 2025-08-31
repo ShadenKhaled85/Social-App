@@ -24,7 +24,7 @@ export class UserProfilePhotoComponent {
     this.usersService.uploadProfilePhoto(uploadProfilePhotoForm).subscribe({
       next:(res)=>{
         console.log(res);
-        this.toastrService.success('Photo uploaded');
+        this.toastrService.success('Profile photo changed');
         this.newProfile.emit();
         //  Clear Form
         this.newProfileImg = null;

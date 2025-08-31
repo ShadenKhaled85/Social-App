@@ -6,10 +6,12 @@ import { CommentComponent } from "../../Shared/Components/comment/comment.compon
 import { initFlowbite } from 'flowbite';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { NewPostComponent } from '../new-post/new-post.component';
+import { UserProfilePhotoComponent } from '../user-profile-photo/user-profile-photo.component';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [DatePipe, CommentComponent, FormsModule],
+  imports: [DatePipe, CommentComponent,NewPostComponent, UserProfilePhotoComponent, FormsModule],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
@@ -25,7 +27,9 @@ export class UserProfileComponent implements OnInit {
   dropdownInitialized = false;
   isUpdate : boolean = false;
   editingPostId : string = '';
-  isModalOpen : boolean = false;
+  isUpdateModalOpen : boolean = false;
+  isCreatePostModalOpen : boolean = false;
+  isChangePhotoModalOpen : boolean = false;
 
   ngOnInit(): void {
     this.getMyPosts()
@@ -42,7 +46,7 @@ export class UserProfileComponent implements OnInit {
     this.postsService.getMyPosts().subscribe({
       next:(res)=>{
         console.log(res);
-        this.myPosts = res.posts;
+        this.myPosts = res.posts.reverse();
       },
       error:(err)=>{
         console.log(err);
@@ -73,7 +77,7 @@ export class UserProfileComponent implements OnInit {
   openEditPost(postId:string){
     this.editingPostId = postId;
     this.isUpdate = true;
-    this.isModalOpen = true;
+    this.isUpdateModalOpen = true;
   }
 
   isEditing(postId:string) : boolean{
@@ -101,9 +105,24 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-
   onCloseModal(){
-    this.isModalOpen = false;
+    if(this.isUpdateModalOpen === true){
+      this.isUpdateModalOpen = false;
+    }
+    if(this.isCreatePostModalOpen === true){
+      this.isCreatePostModalOpen = false;
+    }
+    if(this.isChangePhotoModalOpen === true){
+      this.isChangePhotoModalOpen = false;
+    }
+  }
+
+  onChangePhotoModalOpen(){
+    this.isChangePhotoModalOpen = true;
+  }
+
+  onCreatePostModalOpen(){
+    this.isCreatePostModalOpen = true;
   }
 
 }
