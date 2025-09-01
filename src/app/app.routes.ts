@@ -22,6 +22,7 @@ export const routes: Routes = [
     {path:'login' , component:LoginComponent, title: 'Login'},
     {path:'register' , component:RegisterComponent, title: 'Register'},
     {path:'forgotPass' , component:ForgotPasswordComponent, title: 'Forgot Password'},
-    {path:'**' , component:NotFoundComponent, title: 'Not Found'},
   ]},
+
+  {path:'**' , component:NotFoundComponent, title: 'Not Found!!!'}
 ];

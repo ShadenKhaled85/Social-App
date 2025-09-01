@@ -7,6 +7,7 @@
         class="cursor-pointer bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-3 shadow-sm hover:shadow-md transition">
     </div>
 
+
     @if (isCreatePostModalOpen) {
     <app-new-post [isModalOpen]="isCreatePostModalOpen" (closeModal)="onModalClose()" (newPost)="getAllPosts()">
     </app-new-post>
